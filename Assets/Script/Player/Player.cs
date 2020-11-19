@@ -1,7 +1,4 @@
-﻿using Com.IsartDigital.Common.Utils.Game.Triggers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace Com.IsartDigital.DontLetThemFall.Player {
@@ -30,6 +27,12 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		public float DirectionAxis {
 			get {
 				return Input.GetAxis(nameAxis);
+			}
+		}
+
+		public Vector3 AssetPosition {
+			get {
+				return asset.transform.position;
 			}
 		}
 
@@ -64,7 +67,6 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected void OnTriggerEnter(Collider collision) {
 			if (collision.CompareTag(tagPlayer)) {
 				Player lPlayer = collision.GetComponent<Player>();
-
 				Boing(lPlayer);
 			}
 		}
@@ -80,17 +82,17 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 				forceExterior = 300;
 			}*/
 
-			if (otherPlayer.transform.rotation.y > transform.rotation.y) {
+			Vector3 lDirection = otherPlayer.AssetPosition - AssetPosition;
+
+			if (Vector3.Dot(lDirection, asset.transform.right) > 0) {
 				forceExterior = powerForceExterior;
 				directionForceExterior = -1;
 				boingAction = BoingActionAddForceExterior;
-				Debug.Log("-1");
 			}
 			else {
 				forceExterior = powerForceExterior;
 				directionForceExterior = 1;
 				boingAction = BoingActionAddForceExterior;
-				Debug.Log("1");
 			}
 		}
 
