@@ -96,7 +96,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			transform.Rotate(Vector3.up, forceExterior * Time.deltaTime * directionForceExterior);
 			forceExterior -= decreaseForceExterior;
 
-			Debug.Log(forceExterior);
+			//Debug.Log(forceExterior);
 
 			if (forceExterior <= 0) {
 				boingAction = DoActionVoid;
