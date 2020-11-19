@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         reSpawnArea.OnCollisionTrigger += ReSpawnArea_OnCollisionTrigger;
     }
 
+    private void Update()
+    {
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time);
+    }
+
     private void ReSpawnArea_OnCollisionTrigger(Collider other)
     {
         SpawnLevelObject(other.gameObject);
