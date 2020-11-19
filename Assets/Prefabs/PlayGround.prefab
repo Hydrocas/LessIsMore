@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363325003685730281}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363325003723349913}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 1363325004333207273}
   - component: {fileID: 1363325004333207272}
   - component: {fileID: 1363325004333207275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3544,7 +3544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ddb4b75bd0d1f3247b9ae8e50aa062ad, type: 2}
+  - {fileID: 2100000, guid: 3e989767c7e7a314fba4119b21af669f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3601,7 +3601,7 @@ GameObject:
   - component: {fileID: 1363325004464284409}
   - component: {fileID: 1363325004464284408}
   - component: {fileID: 1363325004464284411}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Boundaries
   m_TagString: Untagged
   m_Icon: {fileID: 0}

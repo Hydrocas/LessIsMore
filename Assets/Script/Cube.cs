@@ -18,9 +18,10 @@ public class Cube : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         audiosource.PlayOneShot(hitSound);
-
+        /*
         particle = Instantiate(collisionParticle);
         particle.transform.position = transform.position;
         Destroy(particle,3f);
+        */
     }
 }
