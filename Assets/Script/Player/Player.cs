@@ -42,8 +42,8 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			boingAction = DoActionVoid;
 
 			transform.position = centreLevel.position;
-			myCollider.center = new Vector3(0, 0, radiusLevel);
-			asset.transform.localPosition = new Vector3(0, 0, radiusLevel);
+			myCollider.center = new Vector3(0, 0, -radiusLevel);
+			asset.transform.localPosition = new Vector3(0, 0, -radiusLevel);
 			
 			transform.Rotate(Vector3.up, orientationStart);
 			//triggerInChild.OnTrigger3DEnter += TriggerInChild_OnTriggerEnter;
