@@ -152,11 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770df9744f35c4646b2a38f8b4a41091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFrequency: 1
-  spawnNumber: 3
-  spawnPoint: {fileID: 1933617911}
-  spawnPointRadius: {fileID: 1003127581}
+  sphereCount: 10
+  spawnSphereFrequency: 1
+  spawnSphereNumber: 2
+  cubeCount: 10
+  spawnCubeFrequency: 1
+  spawnCubeNumber: 3
+  spawnPoint: {fileID: 1933617912}
+  spawnPointRadius: {fileID: 1003127582}
   cubePrefab: {fileID: 5154036091058487330, guid: 358ce3cabf2efe54c837eabcad7efe25, type: 3}
+  spherePrefab: {fileID: 4300645401842759190, guid: 3fc86a69a90ce0e489a996eb9a94f016, type: 3}
 --- !u!4 &294736419
 Transform:
   m_ObjectHideFlags: 0
