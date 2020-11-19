@@ -77,7 +77,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 			Vector3 lDirection = otherPlayer.AssetPosition - AssetPosition;
 
-			if (Vector3.Dot(lDirection, asset.transform.right) > 0) {
+			if (Vector3.Dot(lDirection, asset.transform.right) < 0) {
 				forceExterior = powerForceExterior;
 				directionForceExterior = -1;
 				boingAction = BoingActionAddForceExterior;
