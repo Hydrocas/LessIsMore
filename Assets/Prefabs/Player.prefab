@@ -167,7 +167,7 @@ MonoBehaviour:
   speed: 50
   tagPlayer: Player
   decreaseForceExterior: 1
-  powerForceExterior: 30
+  powerForceExterior: 100
 --- !u!54 &819576791771324165
 Rigidbody:
   m_ObjectHideFlags: 0

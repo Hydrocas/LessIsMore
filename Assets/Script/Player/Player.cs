@@ -77,6 +77,8 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 			Vector3 lDirection = otherPlayer.AssetPosition - AssetPosition;
 
+			//Bug collision 
+
 			if (Vector3.Dot(lDirection, asset.transform.right) < 0) {
 				forceExterior = powerForceExterior;
 				directionForceExterior = -1;
@@ -93,6 +95,8 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected void BoingActionAddForceExterior() {
 			transform.Rotate(Vector3.up, forceExterior * Time.deltaTime * directionForceExterior);
 			forceExterior -= decreaseForceExterior;
+
+			Debug.Log(forceExterior);
 
 			if (forceExterior <= 0) {
 				boingAction = DoActionVoid;
