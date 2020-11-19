@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3638874252113644513}
   - component: {fileID: 3638874252113644516}
   - component: {fileID: 3638874252113644515}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3638874252781742530}
   - component: {fileID: 819576791771324165}
   - component: {fileID: 8789536805017311960}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +135,8 @@ MonoBehaviour:
   myCollider: {fileID: 8789536805017311960}
   speed: 50
   tagPlayer: Player
+  decreaseForceExterior: 1
+  powerForceExterior: 30
 --- !u!54 &819576791771324165
 Rigidbody:
   m_ObjectHideFlags: 0
