@@ -221,7 +221,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-30582
+  m_Name: pb_Mesh-37868
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -466,7 +466,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-30572
+  m_Name: pb_Mesh-37858
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -647,6 +647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 3638874252781742529, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3638874252781742530, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
       propertyPath: nameAxis
       value: HorizontalPlayer2
@@ -667,6 +671,10 @@ PrefabInstance:
       propertyPath: centreLevel
       value: 
       objectReference: {fileID: 1455144819}
+    - target: {fileID: 3638874252781742530, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
+      propertyPath: powerForceExterior
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3638874252781742531, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -820,6 +828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 3638874252781742529, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3638874252781742530, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
       propertyPath: speed
       value: 50
@@ -828,6 +840,10 @@ PrefabInstance:
       propertyPath: centreLevel
       value: 
       objectReference: {fileID: 1455144819}
+    - target: {fileID: 3638874252781742530, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
+      propertyPath: powerForceExterior
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3638874252781742531, guid: 226b780331a8b3c45aa305dba99b27cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5

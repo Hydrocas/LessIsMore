@@ -14,19 +14,36 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
 		[SerializeField] protected GameObject asset = default;
-		[SerializeField] protected Trigger3DInChild triggerInChild;
+		//[SerializeField] protected Trigger3DInChild triggerInChild;
+		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
 
+		[Header("Collision")]
+		[SerializeField] protected string tagPlayer = "Player";
+		[SerializeField] protected float decreaseForceExterior = 1;
+		[SerializeField] protected float powerForceExterior = 30;
+		
+
 		protected Action doAction;
+		protected Action boingAction;
+
+		public float DirectionAxis {
+			get {
+				return Input.GetAxis(nameAxis);
+			}
+		}
 
 		void Start() {
 			SetModeMove();
 
-			transform.position = centreLevel.position;
-			asset.transform.localPosition = new Vector3(0, 0, radiusLevel);
-			transform.Rotate(Vector3.up, orientationStart);
+			boingAction = DoActionVoid;
 
-			//triggerInChild.OnTrigger3DEnter
+			transform.position = centreLevel.position;
+			myCollider.center = new Vector3(0, 0, radiusLevel);
+			asset.transform.localPosition = new Vector3(0, 0, radiusLevel);
+			
+			transform.Rotate(Vector3.up, orientationStart);
+			//triggerInChild.OnTrigger3DEnter += TriggerInChild_OnTriggerEnter;
 		}
 
 		void Update() {
@@ -35,10 +52,60 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		//Move
 		protected void Move() {
-			transform.Rotate(Vector3.up, speed * Input.GetAxis(nameAxis) * Time.deltaTime);
+			float lDeltaTime = Time.deltaTime;
+
+			transform.Rotate(Vector3.up, speed * DirectionAxis * lDeltaTime);
+			
+
+			boingAction();
 		}
 
+		//Collision
+		protected void OnTriggerEnter(Collider collision) {
+			if (collision.CompareTag(tagPlayer)) {
+				Player lPlayer = collision.GetComponent<Player>();
+
+				Boing(lPlayer);
+			}
+		}
+
+		protected float forceExterior;
+		protected int directionForceExterior;
+
+		protected void Boing(Player otherPlayer) {
+			/*if (Mathf.Sign(otherPlayer.DirectionAxis) != Mathf.Sign(DirectionAxis)) {
+				forceExterior = 300;
+			}
+			else {
+				forceExterior = 300;
+			}*/
+
+			if (otherPlayer.transform.rotation.y > transform.rotation.y) {
+				forceExterior = powerForceExterior;
+				directionForceExterior = -1;
+				boingAction = BoingActionAddForceExterior;
+				Debug.Log("-1");
+			}
+			else {
+				forceExterior = powerForceExterior;
+				directionForceExterior = 1;
+				boingAction = BoingActionAddForceExterior;
+				Debug.Log("1");
+			}
+		}
+
+
+
 		//DoAction
+		protected void BoingActionAddForceExterior() {
+			transform.Rotate(Vector3.up, forceExterior * Time.deltaTime * directionForceExterior);
+			forceExterior -= decreaseForceExterior;
+
+			if (forceExterior <= 0) {
+				boingAction = DoActionVoid;
+			}
+		}
+
 		protected void SetModeVoid() {
 			doAction = DoActionVoid;
 		}
