@@ -8,17 +8,14 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 	public class Player : MonoBehaviour {
 		[Header("Start")]
 		[SerializeField] protected float orientationStart = 90;
-		[SerializeField] protected float radius = 10;
+		[SerializeField] protected float radiusLevel = 10;
 		[SerializeField] protected Transform centreLevel = default;
 
-		[Header("Other")]
+		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
 		[SerializeField] protected GameObject asset = default;
-		[SerializeField] protected float speed = 10;
 		[SerializeField] protected Trigger3DInChild triggerInChild;
-
-		
-
+		[SerializeField] protected float speed = 10;
 
 		protected Action doAction;
 
@@ -26,7 +23,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			SetModeMove();
 
 			transform.position = centreLevel.position;
-			asset.transform.localPosition = new Vector3(0, 0, radius);
+			asset.transform.localPosition = new Vector3(0, 0, radiusLevel);
 			transform.Rotate(Vector3.up, orientationStart);
 
 			//triggerInChild.OnTrigger3DEnter
