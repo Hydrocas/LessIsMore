@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 492e34aeade8b184fb856eb85d42769f, type: 3}
+  collisionParticle: {fileID: 8553692798992994459, guid: 5173212242f921e43bcdd25e1854648a, type: 3}
 --- !u!54 &2098016883
 Rigidbody:
   m_ObjectHideFlags: 0
