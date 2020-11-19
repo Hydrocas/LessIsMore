@@ -715,7 +715,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Player 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7377999725490980580, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
 --- !u!1 &592136439
 GameObject:
@@ -746,7 +747,7 @@ Transform:
   m_Children:
   - {fileID: 1416974199}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1416974199
 Transform:
@@ -791,7 +792,7 @@ Transform:
   m_Children:
   - {fileID: 3638874252636184137}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3638874252636184137
 Transform:
