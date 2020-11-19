@@ -22,5 +22,10 @@ public class Cube : MonoBehaviour
         particle = Instantiate(collisionParticle);
         particle.transform.position = transform.position;
         Destroy(particle,3f);
+
+
+        if (other.CompareTag("PlayerTag")) {
+            Debug.Log("ok");
+		}
     }
 }

@@ -11,7 +11,6 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
 		[SerializeField] protected GameObject asset = default;
-		//[SerializeField] protected Trigger3DInChild triggerInChild;
 		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
 
@@ -19,21 +18,19 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected string tagPlayer = "Player";
 		[SerializeField] protected float decreaseForceExterior = 1;
 		[SerializeField] protected float powerForceExterior = 30;
-		
+
+		protected float forceExterior;
+		protected int directionForceExterior;
 
 		protected Action doAction;
 		protected Action boingAction;
 
 		public float DirectionAxis {
-			get {
-				return Input.GetAxis(nameAxis);
-			}
+			get { return Input.GetAxis(nameAxis); }
 		}
 
 		public Vector3 AssetPosition {
-			get {
-				return asset.transform.position;
-			}
+			get { return asset.transform.position; }
 		}
 
 		void Start() {
@@ -46,7 +43,6 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			asset.transform.localPosition = new Vector3(0, 0, radiusLevel);
 			
 			transform.Rotate(Vector3.up, orientationStart);
-			//triggerInChild.OnTrigger3DEnter += TriggerInChild_OnTriggerEnter;
 		}
 
 		void Update() {
@@ -71,9 +67,6 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			}
 		}
 
-		protected float forceExterior;
-		protected int directionForceExterior;
-
 		protected void Boing(Player otherPlayer) {
 			/*if (Mathf.Sign(otherPlayer.DirectionAxis) != Mathf.Sign(DirectionAxis)) {
 				forceExterior = 300;
@@ -95,8 +88,6 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 				boingAction = BoingActionAddForceExterior;
 			}
 		}
-
-
 
 		//DoAction
 		protected void BoingActionAddForceExterior() {
