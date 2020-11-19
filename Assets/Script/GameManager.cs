@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Com.IsartDigital.Common;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,29 +18,30 @@ public class GameManager : MonoBehaviour
     public int spawnCubeNumber = 3;
     public GameObject cubePrefab = null;
 
+    [Space]
     public Transform spawnPoint = null;
     public Transform spawnPointRadius = null;
+    public ColliderChild reSpawnArea = null;
 
-
-    private float deltaTime = 0;
     private Vector3 radiusSpawn;
-
-    private int totalCubeCount;
 
     private void Start()
     {
         radiusSpawn = spawnPointRadius.position - spawnPoint.position;
-        totalCubeCount = cubeCount;
 
         StartCoroutine(SpawnLevelObjectRoutine(cubeCount, spawnCubeNumber, spawnCubeFrequency, cubePrefab)); // Cube spawn
         StartCoroutine(SpawnLevelObjectRoutine(sphereCount, spawnSphereNumber, spawnSphereFrequency, spherePrefab)); // Sphere spawn
+
+        reSpawnArea.OnCollisionTrigger += ReSpawnArea_OnCollisionTrigger;
     }
 
-    #region Spawn Routine
+    private void ReSpawnArea_OnCollisionTrigger(Collider other)
+    {
+        SpawnLevelObject(other.gameObject);
+    }
 
     IEnumerator SpawnLevelObjectRoutine(int spawnTotalNumber, int spawnNumber, float spawnFrequency, GameObject spawnedPrefab)
     {
-        //int spawnCount = spawnNumber;
         int numToSpawn = spawnNumber;
 
         while (true)
@@ -64,60 +66,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("all " + spawnedPrefab + " spawned");
     }
 
-    IEnumerator SpawnCubeRoutine()
-    {
-        while (true)
-        {
-            cubeCount -= spawnCubeNumber;
-
-            int numCubeToSpawn = cubeCount < 0 ? spawnCubeNumber + cubeCount : spawnCubeNumber;
-
-            for (int i = numCubeToSpawn - 1; i >= 0; i--)
-            {
-                SpawnCube(Instantiate(cubePrefab));
-            }
-
-            if (numCubeToSpawn < 0) break;
-
-            yield return new WaitForSeconds(spawnCubeFrequency);
-        }
-
-        Debug.Log("all cube spawned");
-    }
-
-    IEnumerator SpawnSphereRoutine()
-    {
-        while (true)
-        {
-            sphereCount -= spawnCubeNumber;
-
-            int numSphereToSpawn = sphereCount < 0 ? spawnSphereNumber + sphereCount : spawnSphereNumber;
-
-            for (int i = numSphereToSpawn - 1; i >= 0; i--)
-            {
-                SpawnSphere(Instantiate(spherePrefab));
-            }
-
-            if (numSphereToSpawn < 0) break;
-
-            yield return new WaitForSeconds(spawnSphereFrequency);
-        }
-
-        Debug.Log("all sphere spawned");
-    }
-
-    #endregion
-
-    void SpawnSphere(GameObject cube)
-    {
-        SpawnLevelObject(cube);
-    }
-
-    void SpawnCube(GameObject cube)
-    {
-        SpawnLevelObject(cube);
-    }
-
     void SpawnLevelObject(GameObject levelObject)
     {
         Vector3 radiusPos = Quaternion.AngleAxis(Random.value * 360, Vector3.up) * radiusSpawn;
@@ -127,7 +75,12 @@ public class GameManager : MonoBehaviour
 
     void TestVictory(int player1CubeGrabed, int player2CubeGrabed)
     {
-        if (player1CubeGrabed + player2CubeGrabed != totalCubeCount) return;
+        if (player1CubeGrabed + player2CubeGrabed < cubeCount) return;
+        if (player1CubeGrabed + player2CubeGrabed > cubeCount)
+        {
+            Debug.LogWarning("Oh shit ! Les joueur on plus de cube que spawné");
+            return;
+        } 
 
         Time.timeScale = 0;
         Debug.Log("Win");
