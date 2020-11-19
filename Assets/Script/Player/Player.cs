@@ -18,6 +18,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected string tagPlayer = "Player";
 		[SerializeField] protected float decreaseForceExterior = 1;
 		[SerializeField] protected float powerForceExterior = 30;
+		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
 
 		protected float forceExterior;
 		protected int directionForceExterior;
@@ -68,24 +69,25 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		}
 
 		protected void Boing(Player otherPlayer) {
-			/*if (Mathf.Sign(otherPlayer.DirectionAxis) != Mathf.Sign(DirectionAxis)) {
-				forceExterior = 300;
+			if (otherPlayer.DirectionAxis == 0 || DirectionAxis == 0) {
+				forceExterior = powerForceExterior;
+			}
+			else if (Mathf.Sign(otherPlayer.DirectionAxis) != Mathf.Sign(DirectionAxis)) {
+				forceExterior = powerForceExterior * powerMultiply;
 			}
 			else {
-				forceExterior = 300;
-			}*/
+				forceExterior = powerForceExterior;
+			}
+
+			//Bug collision dans master
 
 			Vector3 lDirection = otherPlayer.AssetPosition - AssetPosition;
 
-			//Bug collision 
-
 			if (Vector3.Dot(lDirection, asset.transform.right) < 0) {
-				forceExterior = powerForceExterior;
 				directionForceExterior = -1;
 				boingAction = BoingActionAddForceExterior;
 			}
 			else {
-				forceExterior = powerForceExterior;
 				directionForceExterior = 1;
 				boingAction = BoingActionAddForceExterior;
 			}
