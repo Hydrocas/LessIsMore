@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3369731491817668411}
   - component: {fileID: 2301879497230544116}
   - component: {fileID: 2098016883}
-  - component: {fileID: 2098016877}
   - component: {fileID: 2098016878}
   m_Layer: 0
   m_Name: Cube
@@ -115,8 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6801f107f311d245aca35303b4d68cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 8300000, guid: 492e34aeade8b184fb856eb85d42769f, type: 3}
-  collisionParticle: {fileID: 8553692798992994459, guid: 5173212242f921e43bcdd25e1854648a, type: 3}
+  hitSound: {fileID: 8300000, guid: 4008f48a4f4cb9048a36450045683d7e, type: 3}
+  collisionParticle: {fileID: 6562449674594731587, guid: 7788a182aa5c5934691fe26986fb57d9, type: 3}
+  collisionTag: Ground
+  pitchVariance: {x: 1, y: 1.5}
 --- !u!54 &2098016883
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,19 +134,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2098016877
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5154036091058487330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1, y: 1.1, z: 1.1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &2098016878
 AudioSource:
   m_ObjectHideFlags: 0
@@ -156,10 +144,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4077721268429708603, guid: a32f56970a19efe40b71d5d8e7aa12ce, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 492e34aeade8b184fb856eb85d42769f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4008f48a4f4cb9048a36450045683d7e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.474
-  m_Pitch: 1
+  m_Volume: 0.36
+  m_Pitch: 1.5
   Loop: 0
   Mute: 0
   Spatialize: 0

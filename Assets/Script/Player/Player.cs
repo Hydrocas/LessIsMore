@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Com.IsartDigital.DontLetThemFall.Player {
 	public class Player : MonoBehaviour {
+
 		[Header("Start")]
 		[SerializeField] protected float orientationStart = 90;
 		[SerializeField] protected float radiusLevel = 10;
@@ -13,6 +14,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected GameObject asset = default;
 		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
+		[SerializeField] protected float tiltAnglePower = 1;
 
 		[Header("Collision")]
 		[SerializeField] protected string tagPlayer = "Player";
@@ -55,7 +57,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			float lDeltaTime = Time.deltaTime;
 
 			transform.Rotate(Vector3.up, speed * DirectionAxis * lDeltaTime);
-			
+			asset.transform.localRotation = Quaternion.Euler(0, 0, DirectionAxis * tiltAnglePower); // Tilt Rotation
 
 			boingAction();
 		}
