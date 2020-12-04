@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Com.IsartDigital.DontLetThemFall.Player {
@@ -134,6 +135,22 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		protected void DoActionMove() {
 			Move();
+		}
+
+
+		//Gestion des cubes
+		List<Cube> cubesInPlayer = new List<Cube>();
+
+		//Pour le score savoir quelle cube sont dans le player
+		public void AddCubeToScore(Cube cube) {
+			cubesInPlayer.Add(cube);
+		}
+
+		public void RemoveAllCubes() {
+			for (int i = cubesInPlayer.Count - 1; i >= 0; i--) {
+				cubesInPlayer[i].CubeRemoveOnPlayer();
+				cubesInPlayer.RemoveAt(i);
+			}
 		}
 	}
 }
