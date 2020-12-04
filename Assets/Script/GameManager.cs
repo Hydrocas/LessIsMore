@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnFrequency);
         }
 
-        Debug.Log("all " + spawnedPrefab + " spawned");
+        //Debug.Log("all " + spawnedPrefab + " spawned");
     }
 
     void SpawnLevelObject(GameObject levelObject)

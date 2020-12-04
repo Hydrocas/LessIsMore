@@ -1,6 +1,5 @@
 ﻿using Com.IsartDigital.DontLetThemFall.Player;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Cube : MonoBehaviour {
@@ -8,11 +7,15 @@ public class Cube : MonoBehaviour {
 	[SerializeField] private GameObject collisionParticle = null;
 	[SerializeField] private string collisionTag = "Ground";
 	[Space]
+	[SerializeField] protected Vector2 forceExpulsion = new Vector2(800, 1000);
+
 	public Vector2 pitchVariance = new Vector2(0.9f, 1.1f);
 
 	private GameObject particle = null;
 
 	private AudioSource audiosource = null;
+
+	protected bool isOnCube = false;
 
 	//Hit
 	protected Player _playerParent;
@@ -20,10 +23,22 @@ public class Cube : MonoBehaviour {
 	protected Rigidbody rb;
 	protected Collider currentCollider;
 
+	protected Action doAction;
+	protected float elaspedTime = 0;
+	[SerializeField] protected float timeMaxToWait = 2;
+
 	private void Awake() {
 		audiosource = GetComponent<AudioSource>();
 		rb = GetComponent<Rigidbody>();
 		currentCollider = GetComponent<Collider>();
+	}
+
+	protected void Start() {
+		SetModeVoid();
+	}
+
+	protected void Update() {
+		doAction();
 	}
 
 	private void OnCollisionEnter(Collision collision) {
@@ -31,7 +46,7 @@ public class Cube : MonoBehaviour {
 
 		if (lGameObject.CompareTag(collisionTag)) {
 			SpawnParticleCollision(lGameObject, collision.GetContact(0).point);
-			audiosource.pitch = Random.Range(pitchVariance.x, pitchVariance.y);
+			audiosource.pitch = UnityEngine.Random.Range(pitchVariance.x, pitchVariance.y);
 			audiosource.PlayOneShot(hitSound);
 		}
 	}
@@ -50,6 +65,8 @@ public class Cube : MonoBehaviour {
 	}
 
 	protected void OnTriggerEnter(Collider other) {
+		if (isOnCube) return;
+
 		GameObject lGameObject = other.gameObject;
 
 		Player lPlayer = lGameObject.GetComponent<Player>();
@@ -61,19 +78,50 @@ public class Cube : MonoBehaviour {
 
 	//Met les cubes sur le player
 	protected void CubeAddOnPlayer(Player player) {
+		if (player.AddCubeToScore(this)) return;
+
 		_playerParent = player;
 		transform.parent = player.transform;
 		rb.isKinematic = true;
 		currentCollider.enabled = false;
 
-		player.AddCubeToScore(this);
+		isOnCube = true;
 	}
 
 	//Enlève le cube  du player
-	public void CubeRemoveOnPlayer() {
+	public void CubeRemoveOnPlayer(Vector3 force) {
 		_playerParent = null;
 		transform.parent = null;
 		rb.isKinematic = false;
 		currentCollider.enabled = true;
+		SetModeWait();
+
+
+		//Effet de boom
+		force.y += 0.5f;
+		rb.AddForce(force * UnityEngine.Random.Range(forceExpulsion.x, forceExpulsion.y));
+	}
+
+	//StateMachine
+	protected void SetModeVoid() {
+		doAction = DoActionVoid;
+	}
+
+	protected void DoActionVoid() {}
+
+	protected void SetModeWait() {
+		doAction = DoActionWait;
+		elaspedTime = 0;
+	}
+
+	//Permet d'empêcher que le cube de se remette direct sur le player
+	protected void DoActionWait() {
+		elaspedTime += Time.deltaTime;
+		
+		if (elaspedTime >= timeMaxToWait) {
+			SetModeVoid();
+			isOnCube = false;
+			elaspedTime = 0;
+		}
 	}
 }
