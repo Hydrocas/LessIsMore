@@ -66,9 +66,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		//Collision
 		protected void OnTriggerEnter(Collider collision) {
 			if (collision.CompareTag(tagPlayer)) {
-				Player lPlayer = collision.GetComponent<Player>();
-				BoingEffect(lPlayer.asset.transform.position - asset.transform.position);
-				Boing(lPlayer);
+				Player otherPlayer = collision.GetComponent<Player>();
+
+				BoingEffect(asset.transform.position + (otherPlayer.asset.transform.position - asset.transform.position) / 2);
+
+				Boing(otherPlayer);
 			}
 		}
 
@@ -77,6 +79,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			Debug.Log(position);
 			Transform particleTransform = Instantiate(collisionParticle).transform;
 			particleTransform.position = position;
+			particleTransform.LookAt(asset.transform);
 			Destroy(particleTransform.gameObject, 2f);
 		}
 
