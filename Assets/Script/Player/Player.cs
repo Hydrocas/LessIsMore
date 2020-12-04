@@ -23,11 +23,16 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected float powerForceExterior = 30;
 		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
 
+        [Header("SFX")]
+        [SerializeField] protected List<AudioClip> punchSounds = new List<AudioClip>();
+
 		protected float forceExterior;
 		protected int directionForceExterior;
 
 		protected Action doAction;
 		protected Action boingAction;
+
+        protected AudioSource audioSource;
 
 		public float DirectionAxis {
 			get { return Input.GetAxis(nameAxis); }
@@ -47,6 +52,8 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			asset.transform.localPosition = new Vector3(0, 0, -radiusLevel);
 			
 			transform.Rotate(Vector3.up, orientationStart);
+
+            audioSource = GetComponent<AudioSource>();
 		}
 
 		void Update() {
@@ -68,6 +75,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			if (collision.CompareTag(tagPlayer)) {
 				Player lPlayer = collision.GetComponent<Player>();
 				Boing(lPlayer);
+
+                int lRand = UnityEngine.Random.Range(0, punchSounds.Count);
+
+                audioSource.PlayOneShot(punchSounds[lRand]);
+
 			}
 		}
 
