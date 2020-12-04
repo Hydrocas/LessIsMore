@@ -133,7 +133,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			cubesInPlayer.Add(cube);
 		}
 
-		public void RemoveAllCubes() {
+		public void RemoveAllCubes(Vector3 positionSphere) {
 			for (int i = cubesInPlayer.Count - 1; i >= 0; i--) {
 				cubesInPlayer[i].CubeRemoveOnPlayer();
 				cubesInPlayer.RemoveAt(i);

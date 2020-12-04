@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientationStart: 90
-  radiusLevel: 10
+  radiusLevel: 11
   centreLevel: {fileID: 0}
   nameAxis: HorizontalPlayer1
   asset: {fileID: 3638874252113644512}

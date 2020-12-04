@@ -31,6 +31,14 @@ public class Cube : MonoBehaviour {
 		currentCollider = GetComponent<Collider>();
 	}
 
+	protected void Start() {
+		SetModeVoid();
+	}
+
+	protected void Update() {
+		doAction();
+	}
+
 	private void OnCollisionEnter(Collision collision) {
 		GameObject lGameObject = collision.gameObject;
 
@@ -85,8 +93,7 @@ public class Cube : MonoBehaviour {
 		rb.isKinematic = false;
 		currentCollider.enabled = true;
 		SetModeWait();
-
-		rb.AddForce(Vector3.up);
+		rb.AddForce(new Vector3(UnityEngine.Random.Range(-1, 1), 1, UnityEngine.Random.Range(-1, 1)) * 1000);
 	}
 
 	//StateMachine
@@ -99,13 +106,15 @@ public class Cube : MonoBehaviour {
 	protected void SetModeWait() {
 		doAction = DoActionWait;
 		elaspedTime = 0;
+		Debug.Log("Yolo");
 	}
 
 	protected void DoActionWait() {
 		elaspedTime += Time.deltaTime;
-
+		
 		if (elaspedTime >= timeMaxToWait) {
 			SetModeVoid();
+			Debug.Log("ok");
 			isOnCube = false;
 			elaspedTime = 0;
 		}

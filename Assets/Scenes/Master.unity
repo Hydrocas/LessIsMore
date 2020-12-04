@@ -848,10 +848,6 @@ PrefabInstance:
       propertyPath: centreLevel
       value: 
       objectReference: {fileID: 1455144819}
-    - target: {fileID: 7701096017526797916, guid: a680353c906c12646a34672c65f11e7b, type: 3}
-      propertyPath: radiusLevel
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 7701096017526797917, guid: a680353c906c12646a34672c65f11e7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1773,10 +1769,6 @@ PrefabInstance:
       propertyPath: centreLevel
       value: 
       objectReference: {fileID: 1455144819}
-    - target: {fileID: 4487111404944752576, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
-      propertyPath: radiusLevel
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 4487111404944752577, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5

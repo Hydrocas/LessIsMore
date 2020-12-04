@@ -12,7 +12,7 @@ public class Sphere : MonoBehaviour {
 		Player lPlayer = other.gameObject.GetComponent<Player>();
 
 		if (lPlayer != null) {
-			lPlayer.RemoveAllCubes();
+			lPlayer.RemoveAllCubes(transform.position);
 		}
 	}
 }
