@@ -11,7 +11,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
-		[SerializeField] protected GameObject asset = default;
+		[SerializeField] public GameObject asset = default;
 		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
 		[SerializeField] protected float tiltAnglePower = 1;
@@ -21,6 +21,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected float decreaseForceExterior = 1;
 		[SerializeField] protected float powerForceExterior = 30;
 		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
+		[SerializeField] protected GameObject collisionParticle = null;
 
 		protected float forceExterior;
 		protected int directionForceExterior;
@@ -66,8 +67,17 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected void OnTriggerEnter(Collider collision) {
 			if (collision.CompareTag(tagPlayer)) {
 				Player lPlayer = collision.GetComponent<Player>();
+				BoingEffect(lPlayer.asset.transform.position - asset.transform.position);
 				Boing(lPlayer);
 			}
+		}
+
+		protected void BoingEffect(Vector3 position)
+        {
+			Debug.Log(position);
+			Transform particleTransform = Instantiate(collisionParticle).transform;
+			particleTransform.position = position;
+			Destroy(particleTransform.gameObject, 2f);
 		}
 
 		protected void Boing(Player otherPlayer) {

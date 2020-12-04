@@ -172,6 +172,7 @@ MonoBehaviour:
   decreaseForceExterior: 150
   powerForceExterior: 100
   powerMultiply: 1.5
+  collisionParticle: {fileID: 9097062893388169719, guid: bd260bef2de5e404c83c8d8106e7ada7, type: 3}
 --- !u!54 &819576791771324165
 Rigidbody:
   m_ObjectHideFlags: 0
