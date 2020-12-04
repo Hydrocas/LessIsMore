@@ -357,7 +357,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-162528
+  m_Name: pb_Mesh-3272
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -574,6 +574,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1363325003723349913, guid: f3c133cc6974dd644ae6163d43865ca9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363325003723349913, guid: f3c133cc6974dd644ae6163d43865ca9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1363325003723349913, guid: f3c133cc6974dd644ae6163d43865ca9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1363325004333207272, guid: f3c133cc6974dd644ae6163d43865ca9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -643,7 +655,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-162520
+  m_Name: pb_Mesh-3264
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -852,6 +864,10 @@ PrefabInstance:
       propertyPath: radiusLevel
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 7701096017526797916, guid: a680353c906c12646a34672c65f11e7b, type: 3}
+      propertyPath: cameraEffect
+      value: 
+      objectReference: {fileID: 1732963394}
     - target: {fileID: 7701096017526797917, guid: a680353c906c12646a34672c65f11e7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1108,11 +1124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35541fc4035fb4408e2652a9ecfc2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera1: {fileID: 1401371467}
+  camera1: {fileID: 0}
   camera1Pos: {fileID: 298157538}
-  camera2: {fileID: 988309842}
+  camera2: {fileID: 0}
   camera2Pos: {fileID: 2116687951}
-  mainCamera: {fileID: 2020798980}
+  mainCamera: {fileID: 0}
   splitScreen: {fileID: 1467149015}
   distanceToSplit: 40
 --- !u!1001 &459532429
@@ -1182,6 +1198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8899599031981927540, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 63adb4d25723ed348ad8df6778e3135e, type: 2}
     m_RemovedComponents:
     - {fileID: 7377999725490980580, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
@@ -1777,6 +1797,10 @@ PrefabInstance:
       propertyPath: radiusLevel
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 4487111404944752576, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
+      propertyPath: cameraEffect
+      value: 
+      objectReference: {fileID: 1566055327}
     - target: {fileID: 4487111404944752577, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
@@ -1867,11 +1891,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
---- !u!20 &988309842 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7377999725490980581, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
-  m_PrefabInstance: {fileID: 459532429}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1135374692
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,11 +2116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1401371467 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7377999725490980581, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
-  m_PrefabInstance: {fileID: 7377999724008617532}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412830238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2258,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1566055327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308431940443469864, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
+  m_PrefabInstance: {fileID: 459532429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfc2451ef5bd4a4aa494313c1be3b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1721630085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,6 +2348,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721630085}
   m_CullTransparentMesh: 0
+--- !u!114 &1732963394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6308431940443469864, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
+  m_PrefabInstance: {fileID: 7377999724008617532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfc2451ef5bd4a4aa494313c1be3b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1864851645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,11 +2612,6 @@ PrefabInstance:
 --- !u!4 &2020798979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7377999725490980582, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
-  m_PrefabInstance: {fileID: 2020798978}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &2020798980 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7377999725490980581, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
   m_PrefabInstance: {fileID: 2020798978}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2116687951 stripped
@@ -2907,6 +2938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8899599031981927540, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: 60e2a507484f89e4f81e960b9f7bf3ba, type: 2}
     m_RemovedComponents:
     - {fileID: 7377999725490980580, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f0e36de8ec28eb43bd4e993efce8a97, type: 3}

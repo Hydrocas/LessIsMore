@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Com.IsartDigital.Common;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected float powerForceExterior = 30;
 		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
 		[SerializeField] protected GameObject collisionParticle = null;
+
+		[Header("Shake")]
+		[SerializeField] protected CameraEffect cameraEffect = null;
+		[SerializeField] protected float cameraEffectDuration = 1;
+		[SerializeField] protected float cameraEffectStrengh = 1;
 
 		protected float forceExterior;
 		protected int directionForceExterior;
@@ -77,11 +83,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		protected void BoingEffect(Vector3 position)
         {
-			Debug.Log(position);
 			Transform particleTransform = Instantiate(collisionParticle).transform;
 			particleTransform.position = position;
 			particleTransform.LookAt(asset.transform);
 			Destroy(particleTransform.gameObject, 2f);
+			cameraEffect.DoScreenShake(cameraEffectDuration, cameraEffectStrengh);
 		}
 
 		protected void Boing(Player otherPlayer) {
