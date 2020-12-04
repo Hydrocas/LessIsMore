@@ -7,6 +7,8 @@ public class Cube : MonoBehaviour {
 	[SerializeField] private GameObject collisionParticle = null;
 	[SerializeField] private string collisionTag = "Ground";
 	[Space]
+	[SerializeField] protected Vector2 forceExpulsion = new Vector2(800, 1000);
+
 	public Vector2 pitchVariance = new Vector2(0.9f, 1.1f);
 
 	private GameObject particle = null;
@@ -76,24 +78,28 @@ public class Cube : MonoBehaviour {
 
 	//Met les cubes sur le player
 	protected void CubeAddOnPlayer(Player player) {
+		if (player.AddCubeToScore(this)) return;
+
 		_playerParent = player;
 		transform.parent = player.transform;
 		rb.isKinematic = true;
 		currentCollider.enabled = false;
 
 		isOnCube = true;
-
-		player.AddCubeToScore(this);
 	}
 
 	//Enlève le cube  du player
-	public void CubeRemoveOnPlayer() {
+	public void CubeRemoveOnPlayer(Vector3 force) {
 		_playerParent = null;
 		transform.parent = null;
 		rb.isKinematic = false;
 		currentCollider.enabled = true;
 		SetModeWait();
-		rb.AddForce(new Vector3(UnityEngine.Random.Range(-1, 1), 1, UnityEngine.Random.Range(-1, 1)) * 1000);
+
+
+		//Effet de boom
+		force.y += 0.5f;
+		rb.AddForce(force * UnityEngine.Random.Range(forceExpulsion.x, forceExpulsion.y));
 	}
 
 	//StateMachine
@@ -106,15 +112,14 @@ public class Cube : MonoBehaviour {
 	protected void SetModeWait() {
 		doAction = DoActionWait;
 		elaspedTime = 0;
-		Debug.Log("Yolo");
 	}
 
+	//Permet d'empêcher que le cube de se remette direct sur le player
 	protected void DoActionWait() {
 		elaspedTime += Time.deltaTime;
 		
 		if (elaspedTime >= timeMaxToWait) {
 			SetModeVoid();
-			Debug.Log("ok");
 			isOnCube = false;
 			elaspedTime = 0;
 		}

@@ -33,11 +33,22 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
         [Header("SFX")]
         [SerializeField] protected List<AudioClip> punchSounds = new List<AudioClip>();
 
+		[Header("Stun + Collision with sphere")]
+		[SerializeField] protected float timeMaxToStun = 2;
+		//Rotation quand il touche un sphere
+		[SerializeField] protected float forceToStun = 50;
+
 		protected float forceExterior;
 		protected int directionForceExterior;
 
 		protected Action doAction;
 		protected Action boingAction;
+
+		//collisionToSphere
+		protected List<Cube> cubesInPlayer = new List<Cube>();
+		protected bool isStun = false;
+		protected float elapsedTime = 0;
+		protected Rigidbody rbAsset;
 
         protected AudioSource audioSource;
 
@@ -49,7 +60,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			get { return asset.transform.position; }
 		}
 
-		void Start() {
+		protected void Start() {
 			SetModeMove();
 
 			boingAction = DoActionVoid;
@@ -61,9 +72,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			transform.Rotate(Vector3.up, orientationStart);
 
             audioSource = GetComponent<AudioSource>();
+
+			rbAsset = asset.GetComponent<Rigidbody>();
 		}
 
-		void Update() {
+		protected void Update() {
 			doAction();
 		}
 
@@ -72,9 +85,12 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			float lDeltaTime = Time.deltaTime;
 
 			transform.Rotate(Vector3.up, speed * DirectionAxis * lDeltaTime);
-			asset.transform.localRotation = Quaternion.Euler(0, 0, DirectionAxis * tiltAnglePower); // Tilt Rotation
 
 			boingAction();
+		}
+
+		protected void Tilt() {
+			asset.transform.localRotation = Quaternion.Euler(0, 0, DirectionAxis * tiltAnglePower); // Tilt Rotation
 		}
 
 		//Collision
@@ -156,20 +172,57 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		protected void DoActionMove() {
 			Move();
+			Tilt();
+		}
+
+		protected void SetModeWait() {
+			doAction = DoActionWait;
+			
+		}
+
+		protected void DoActionWait() {
+			elapsedTime += Time.deltaTime;
+
+			Move();
+
+			if (elapsedTime >= timeMaxToStun) {
+				elapsedTime = 0;
+				SetModeMove();
+				isStun = false;
+
+				asset.transform.rotation = Quaternion.identity;
+				rbAsset.angularVelocity = Vector3.zero;
+			}
 		}
 
 
 		//Gestion des cubes
-		List<Cube> cubesInPlayer = new List<Cube>();
 
 		//Pour le score savoir quelle cube sont dans le player
-		public void AddCubeToScore(Cube cube) {
+		public bool AddCubeToScore(Cube cube) {
+			if (isStun) return true;
+
 			cubesInPlayer.Add(cube);
+
+			return false;
 		}
 
 		public void RemoveAllCubes(Vector3 positionSphere) {
+			if (isStun) return;
+
+			isStun = true;
+
+			SetModeWait();
+
+			positionSphere.y = asset.transform.position.y;
+			Vector3 lDirection = positionSphere - asset.transform.position;
+
+			Vector3.Cross(lDirection, asset.transform.up);
+
+			rbAsset.AddTorque(Vector3.Cross(lDirection, -asset.transform.up) * forceToStun);
+
 			for (int i = cubesInPlayer.Count - 1; i >= 0; i--) {
-				cubesInPlayer[i].CubeRemoveOnPlayer();
+				cubesInPlayer[i].CubeRemoveOnPlayer(lDirection);
 				cubesInPlayer.RemoveAt(i);
 			}
 		}
