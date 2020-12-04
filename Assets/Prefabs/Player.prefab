@@ -174,6 +174,9 @@ MonoBehaviour:
   powerForceExterior: 100
   powerMultiply: 1.5
   collisionParticle: {fileID: 9097062893388169719, guid: bd260bef2de5e404c83c8d8106e7ada7, type: 3}
+  cameraEffect: {fileID: 0}
+  cameraEffectDuration: 0.2
+  cameraEffectStrengh: 0.4
   punchSounds:
   - {fileID: 8300000, guid: 39adbab08fa152d4081372b0f851e838, type: 3}
   - {fileID: 8300000, guid: 846f18ea6f5bcf641bf5ecb63372da4d, type: 3}
