@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Com.IsartDigital.Common;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
-		[SerializeField] protected GameObject asset = default;
+		[SerializeField] public GameObject asset = default;
 		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
 		[SerializeField] protected float tiltAnglePower = 1;
@@ -22,12 +23,23 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected float decreaseForceExterior = 1;
 		[SerializeField] protected float powerForceExterior = 30;
 		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
+		[SerializeField] protected GameObject collisionParticle = null;
+
+		[Header("Shake")]
+		[SerializeField] protected CameraEffect cameraEffect = null;
+		[SerializeField] protected float cameraEffectDuration = 1;
+		[SerializeField] protected float cameraEffectStrengh = 1;
+
+        [Header("SFX")]
+        [SerializeField] protected List<AudioClip> punchSounds = new List<AudioClip>();
 
 		protected float forceExterior;
 		protected int directionForceExterior;
 
 		protected Action doAction;
 		protected Action boingAction;
+
+        protected AudioSource audioSource;
 
 		public float DirectionAxis {
 			get { return Input.GetAxis(nameAxis); }
@@ -47,6 +59,8 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			asset.transform.localPosition = new Vector3(0, 0, -radiusLevel);
 			
 			transform.Rotate(Vector3.up, orientationStart);
+
+            audioSource = GetComponent<AudioSource>();
 		}
 
 		void Update() {
@@ -66,9 +80,29 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		//Collision
 		protected void OnTriggerEnter(Collider collision) {
 			if (collision.CompareTag(tagPlayer)) {
+
 				Player lPlayer = collision.GetComponent<Player>();
 				Boing(lPlayer);
+
+                int lRand = UnityEngine.Random.Range(0, punchSounds.Count);
+
+                audioSource.PlayOneShot(punchSounds[lRand]);
+
+				Player otherPlayer = collision.GetComponent<Player>();
+
+				BoingEffect(asset.transform.position + (otherPlayer.asset.transform.position - asset.transform.position) / 2);
+
+				Boing(otherPlayer);
 			}
+		}
+
+		protected void BoingEffect(Vector3 position)
+        {
+			Transform particleTransform = Instantiate(collisionParticle).transform;
+			particleTransform.position = position;
+			particleTransform.LookAt(asset.transform);
+			Destroy(particleTransform.gameObject, 2f);
+			cameraEffect.DoScreenShake(cameraEffectDuration, cameraEffectStrengh);
 		}
 
 		protected void Boing(Player otherPlayer) {
