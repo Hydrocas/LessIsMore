@@ -22,11 +22,15 @@ public class GameManager : MonoBehaviour
     public Transform spawnPoint = null;
     public Transform spawnPointRadius = null;
     public ColliderChild reSpawnArea = null;
+    [Space]
+    public Vector2 pitchVariance = new Vector2(0.9f, 1.1f);
 
     private Vector3 radiusSpawn;
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         radiusSpawn = spawnPointRadius.position - spawnPoint.position;
 
         StartCoroutine(SpawnLevelObjectRoutine(cubeCount, spawnCubeNumber, spawnCubeFrequency, cubePrefab)); // Cube spawn
@@ -76,6 +80,9 @@ public class GameManager : MonoBehaviour
         Vector3 radiusPos = Quaternion.AngleAxis(Random.value * 360, Vector3.up) * radiusSpawn;
         levelObject.transform.position = spawnPoint.position + radiusPos; // random position
         levelObject.transform.rotation = Quaternion.AngleAxis(Random.value * 360, Vector3.right); // random rotation
+
+        audioSource.pitch = Random.Range(pitchVariance.x, pitchVariance.y);
+        audioSource.Play();
     }
 
     void TestVictory(int player1CubeGrabed, int player2CubeGrabed)
