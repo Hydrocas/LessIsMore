@@ -12,7 +12,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 		[Header("Movement")]
 		[SerializeField] protected string nameAxis = "HorizontalPlayer1";
-		[SerializeField] protected GameObject asset = default;
+		[SerializeField] public GameObject asset = default;
 		[SerializeField] protected BoxCollider myCollider = default;
 		[SerializeField] protected float speed = 10;
 		[SerializeField] protected float tiltAnglePower = 1;
@@ -22,6 +22,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		[SerializeField] protected float decreaseForceExterior = 1;
 		[SerializeField] protected float powerForceExterior = 30;
 		[SerializeField, Range(1, 2)] protected float powerMultiply = 1;
+		[SerializeField] protected GameObject collisionParticle = null;
 
         [Header("SFX")]
         [SerializeField] protected List<AudioClip> punchSounds = new List<AudioClip>();
@@ -73,6 +74,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		//Collision
 		protected void OnTriggerEnter(Collider collision) {
 			if (collision.CompareTag(tagPlayer)) {
+
 				Player lPlayer = collision.GetComponent<Player>();
 				Boing(lPlayer);
 
@@ -80,7 +82,21 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
                 audioSource.PlayOneShot(punchSounds[lRand]);
 
+				Player otherPlayer = collision.GetComponent<Player>();
+
+				BoingEffect(asset.transform.position + (otherPlayer.asset.transform.position - asset.transform.position) / 2);
+
+				Boing(otherPlayer);
 			}
+		}
+
+		protected void BoingEffect(Vector3 position)
+        {
+			Debug.Log(position);
+			Transform particleTransform = Instantiate(collisionParticle).transform;
+			particleTransform.position = position;
+			particleTransform.LookAt(asset.transform);
+			Destroy(particleTransform.gameObject, 2f);
 		}
 
 		protected void Boing(Player otherPlayer) {
