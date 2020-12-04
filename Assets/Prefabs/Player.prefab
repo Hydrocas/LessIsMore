@@ -169,7 +169,7 @@ MonoBehaviour:
   speed: 50
   tiltAnglePower: 10
   tagPlayer: Player
-  decreaseForceExterior: 1
+  decreaseForceExterior: 150
   powerForceExterior: 100
   powerMultiply: 1.5
 --- !u!54 &819576791771324165
