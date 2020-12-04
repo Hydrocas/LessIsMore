@@ -1,6 +1,5 @@
 ﻿using Com.IsartDigital.DontLetThemFall.Player;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Cube : MonoBehaviour {
@@ -14,11 +13,17 @@ public class Cube : MonoBehaviour {
 
 	private AudioSource audiosource = null;
 
+	protected bool isOnCube = false;
+
 	//Hit
 	protected Player _playerParent;
 	public Player PlayerParent => _playerParent;
 	protected Rigidbody rb;
 	protected Collider currentCollider;
+
+	protected Action doAction;
+	protected float elaspedTime = 0;
+	[SerializeField] protected float timeMaxToWait = 2;
 
 	private void Awake() {
 		audiosource = GetComponent<AudioSource>();
@@ -31,7 +36,7 @@ public class Cube : MonoBehaviour {
 
 		if (lGameObject.CompareTag(collisionTag)) {
 			SpawnParticleCollision(lGameObject, collision.GetContact(0).point);
-			audiosource.pitch = Random.Range(pitchVariance.x, pitchVariance.y);
+			audiosource.pitch = UnityEngine.Random.Range(pitchVariance.x, pitchVariance.y);
 			audiosource.PlayOneShot(hitSound);
 		}
 	}
@@ -50,6 +55,8 @@ public class Cube : MonoBehaviour {
 	}
 
 	protected void OnTriggerEnter(Collider other) {
+		if (isOnCube) return;
+
 		GameObject lGameObject = other.gameObject;
 
 		Player lPlayer = lGameObject.GetComponent<Player>();
@@ -66,6 +73,8 @@ public class Cube : MonoBehaviour {
 		rb.isKinematic = true;
 		currentCollider.enabled = false;
 
+		isOnCube = true;
+
 		player.AddCubeToScore(this);
 	}
 
@@ -75,5 +84,30 @@ public class Cube : MonoBehaviour {
 		transform.parent = null;
 		rb.isKinematic = false;
 		currentCollider.enabled = true;
+		SetModeWait();
+
+		rb.AddForce(Vector3.up);
+	}
+
+	//StateMachine
+	protected void SetModeVoid() {
+		doAction = DoActionVoid;
+	}
+
+	protected void DoActionVoid() {}
+
+	protected void SetModeWait() {
+		doAction = DoActionWait;
+		elaspedTime = 0;
+	}
+
+	protected void DoActionWait() {
+		elaspedTime += Time.deltaTime;
+
+		if (elaspedTime >= timeMaxToWait) {
+			SetModeVoid();
+			isOnCube = false;
+			elaspedTime = 0;
+		}
 	}
 }
