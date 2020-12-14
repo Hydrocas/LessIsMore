@@ -52,6 +52,13 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
         protected AudioSource audioSource;
 
+		public int CubesInPlayerCount {
+			get {
+				return cubesInPlayer.Count;
+			}
+		}
+		public event Action OnWin;
+
 		public float DirectionAxis {
 			get { return Input.GetAxis(nameAxis); }
 		}
@@ -203,6 +210,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			if (isStun) return true;
 
 			cubesInPlayer.Add(cube);
+			OnWin();
 
 			return false;
 		}

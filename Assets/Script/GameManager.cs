@@ -1,100 +1,109 @@
 ﻿using Com.IsartDigital.Common;
+using Com.IsartDigital.DontLetThemFall.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
 
-    [Header("Sphere")]
-    public int sphereCount = 10;
-    public float spawnSphereFrequency = 1;
-    public int spawnSphereNumber = 2;
-    public GameObject spherePrefab = null;
+	[Header("Player")]
+	[SerializeField] protected List<Player> players = default;
 
-    [Header("Cube")]
-    public int cubeCount = 10;
-    public float spawnCubeFrequency = 1;
-    public int spawnCubeNumber = 3;
-    public GameObject cubePrefab = null;
+	[Header("Sphere")]
+	public int sphereCount = 10;
+	public float spawnSphereFrequency = 1;
+	public int spawnSphereNumber = 2;
+	public GameObject spherePrefab = null;
 
-    [Space]
-    public Transform spawnPoint = null;
-    public Transform spawnPointRadius = null;
-    public ColliderChild reSpawnArea = null;
-    [Space]
-    public Vector2 pitchVariance = new Vector2(0.9f, 1.1f);
+	[Header("Cube")]
+	public int cubeCount = 10;
+	public float spawnCubeFrequency = 1;
+	public int spawnCubeNumber = 3;
+	public GameObject cubePrefab = null;
 
-    private Vector3 radiusSpawn;
-    private AudioSource audioSource;
+	[Space]
+	public Transform spawnPoint = null;
+	public Transform spawnPointRadius = null;
+	public ColliderChild reSpawnArea = null;
+	[Space]
+	public Vector2 pitchVariance = new Vector2(0.9f, 1.1f);
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        radiusSpawn = spawnPointRadius.position - spawnPoint.position;
+	private Vector3 radiusSpawn;
+	private AudioSource audioSource;
 
-        StartCoroutine(SpawnLevelObjectRoutine(cubeCount, spawnCubeNumber, spawnCubeFrequency, cubePrefab)); // Cube spawn
-        StartCoroutine(SpawnLevelObjectRoutine(sphereCount, spawnSphereNumber, spawnSphereFrequency, spherePrefab)); // Sphere spawn
+	private void Start() {
+		audioSource = GetComponent<AudioSource>();
+		radiusSpawn = spawnPointRadius.position - spawnPoint.position;
 
-        reSpawnArea.OnCollisionTrigger += ReSpawnArea_OnCollisionTrigger;
-    }
+		StartCoroutine(SpawnLevelObjectRoutine(cubeCount, spawnCubeNumber, spawnCubeFrequency, cubePrefab)); // Cube spawn
+		StartCoroutine(SpawnLevelObjectRoutine(sphereCount, spawnSphereNumber, spawnSphereFrequency, spherePrefab)); // Sphere spawn
 
-    private void Update()
-    {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time);
-    }
+		reSpawnArea.OnCollisionTrigger += ReSpawnArea_OnCollisionTrigger;
 
-    private void ReSpawnArea_OnCollisionTrigger(Collider other)
-    {
-        SpawnLevelObject(other.gameObject);
-    }
+		for (int i = players.Count - 1; i >= 0; i--) {
+			players[i].OnWin += Player_OnWin;
+		}
+	}
 
-    IEnumerator SpawnLevelObjectRoutine(int spawnTotalNumber, int spawnNumber, float spawnFrequency, GameObject spawnedPrefab)
-    {
-        int numToSpawn = spawnNumber;
+	private void OnDestroy() {
+		for (int i = players.Count - 1; i >= 0; i--) {
+			players[i].OnWin -= Player_OnWin;
+		}
+	}
 
-        while (true)
-        {
-            spawnTotalNumber -= spawnNumber;
+	private void Update() {
+		RenderSettings.skybox.SetFloat("_Rotation", Time.time);
+	}
 
-            if (spawnTotalNumber < 0)
-            {
-                numToSpawn = spawnNumber + spawnTotalNumber;
-            }
+	private void ReSpawnArea_OnCollisionTrigger(Collider other) {
+		SpawnLevelObject(other.gameObject);
+	}
 
-            for (int i = numToSpawn - 1; i >= 0; i--)
-            {
-                SpawnLevelObject(Instantiate(spawnedPrefab));
-            }
+	IEnumerator SpawnLevelObjectRoutine(int spawnTotalNumber, int spawnNumber, float spawnFrequency, GameObject spawnedPrefab) {
+		int numToSpawn = spawnNumber;
 
-            if (spawnTotalNumber < 0) break;
+		while (true) {
+			spawnTotalNumber -= spawnNumber;
 
-            yield return new WaitForSeconds(spawnFrequency);
-        }
+			if (spawnTotalNumber < 0) {
+				numToSpawn = spawnNumber + spawnTotalNumber;
+			}
 
-        //Debug.Log("all " + spawnedPrefab + " spawned");
-    }
+			for (int i = numToSpawn - 1; i >= 0; i--) {
+				SpawnLevelObject(Instantiate(spawnedPrefab));
+			}
 
-    void SpawnLevelObject(GameObject levelObject)
-    {
-        Vector3 radiusPos = Quaternion.AngleAxis(Random.value * 360, Vector3.up) * radiusSpawn;
-        levelObject.transform.position = spawnPoint.position + radiusPos; // random position
-        levelObject.transform.rotation = Quaternion.AngleAxis(Random.value * 360, Vector3.right); // random rotation
+			if (spawnTotalNumber < 0) break;
 
-        audioSource.pitch = Random.Range(pitchVariance.x, pitchVariance.y);
-        audioSource.Play();
-    }
+			yield return new WaitForSeconds(spawnFrequency);
+		}
 
-    void TestVictory(int player1CubeGrabed, int player2CubeGrabed)
-    {
-        if (player1CubeGrabed + player2CubeGrabed < cubeCount) return;
-        if (player1CubeGrabed + player2CubeGrabed > cubeCount)
-        {
-            Debug.LogWarning("Oh shit ! Les joueur on plus de cube que spawné");
-            return;
-        } 
+		//Debug.Log("all " + spawnedPrefab + " spawned");
+	}
 
-        Time.timeScale = 0;
-        Debug.Log("Win");
-    }
+	protected void SpawnLevelObject(GameObject levelObject) {
+		Vector3 radiusPos = Quaternion.AngleAxis(Random.value * 360, Vector3.up) * radiusSpawn;
+		levelObject.transform.position = spawnPoint.position + radiusPos; // random position
+		levelObject.transform.rotation = Quaternion.AngleAxis(Random.value * 360, Vector3.right); // random rotation
+
+		audioSource.pitch = Random.Range(pitchVariance.x, pitchVariance.y);
+		audioSource.Play();
+	}
+
+	/// <summary>
+	/// Win
+	/// </summary>
+	protected void Player_OnWin() {
+		int lCubesCount = 0;
+
+		for (int i = players.Count - 1; i >= 0; i--) {
+			lCubesCount += players[i].CubesInPlayerCount;
+		}
+
+		if (lCubesCount >= cubeCount) {
+			Time.timeScale = 0;
+
+			Debug.Log("Win");
+		}
+	}
 }

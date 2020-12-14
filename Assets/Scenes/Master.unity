@@ -919,6 +919,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3481136143755927550, guid: a680353c906c12646a34672c65f11e7b, type: 3}
   m_PrefabInstance: {fileID: 298157537}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &298157539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7701096017526797916, guid: a680353c906c12646a34672c65f11e7b, type: 3}
+  m_PrefabInstance: {fileID: 298157537}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee89d73091222e4ea1260178004f7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &322347461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1894,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
+--- !u!114 &962255416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4487111404944752576, guid: a9c105bc8c3ab44449d1f0531f010546, type: 3}
+  m_PrefabInstance: {fileID: 962255415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee89d73091222e4ea1260178004f7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1135374692
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2763,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770df9744f35c4646b2a38f8b4a41091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players:
+  - {fileID: 298157539}
+  - {fileID: 962255416}
   sphereCount: 10
   spawnSphereFrequency: 1
   spawnSphereNumber: 2
