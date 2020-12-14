@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cube : MonoBehaviour {
 	[SerializeField] private AudioClip hitSound = null;
 	[SerializeField] private GameObject collisionParticle = null;
+	[SerializeField] private GameObject collectParticle = null;
 	[SerializeField] private string collisionTag = "Ground";
 	[Space]
 	[SerializeField] protected Vector2 forceExpulsion = new Vector2(800, 1000);
@@ -86,6 +87,7 @@ public class Cube : MonoBehaviour {
 		currentCollider.enabled = false;
 
 		isOnCube = true;
+		Destroy(Instantiate(collectParticle), 0.5f);
 	}
 
 	//Enlève le cube  du player

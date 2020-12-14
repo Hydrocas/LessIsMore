@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 4008f48a4f4cb9048a36450045683d7e, type: 3}
   collisionParticle: {fileID: 6562449674594731587, guid: 7788a182aa5c5934691fe26986fb57d9, type: 3}
+  collectParticle: {fileID: 7946736214569708230, guid: 80707ce29c273a44eb02bbb95f7d34ee, type: 3}
   collisionTag: Ground
   forceExpulsion: {x: 500, y: 700}
   pitchVariance: {x: 1, y: 1.5}
