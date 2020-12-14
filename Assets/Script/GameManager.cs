@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = numToSpawn - 1; i >= 0; i--)
             {
-                SpawnLevelObject(Instantiate(spawnedPrefab));
+                SpawnLevelObject(Instantiate(spawnedPrefab, transform));
             }
 
             if (spawnTotalNumber < 0) break;
