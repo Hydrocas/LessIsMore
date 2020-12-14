@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Com.IsartDigital.DontLetThemFall.Player {
 	public class Player : MonoBehaviour {
@@ -51,6 +52,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected Rigidbody rbAsset;
 
         protected AudioSource audioSource;
+		private Controller controller;
 
 		public int CubesInPlayerCount {
 			get {
@@ -62,9 +64,21 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		public float DirectionAxis {
 			get { return Input.GetAxis(nameAxis); }
 		}
+		private float directionAxis;
 
 		public Vector3 AssetPosition {
 			get { return asset.transform.position; }
+		}
+
+		public void ListenController(Controller controller)
+		{
+			this.controller = controller;
+			controller.OnMoving += Controller_OnMoving;
+		}
+
+		private void Controller_OnMoving(float value)
+		{
+			directionAxis = value;
 		}
 
 		protected void Start() {
@@ -91,13 +105,13 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected void Move() {
 			float lDeltaTime = Time.deltaTime;
 
-			transform.Rotate(Vector3.up, speed * DirectionAxis * lDeltaTime);
+			transform.Rotate(Vector3.up, speed * directionAxis * lDeltaTime);
 
 			boingAction();
 		}
-
+		
 		protected void Tilt() {
-			asset.transform.localRotation = Quaternion.Euler(0, 0, DirectionAxis * tiltAnglePower); // Tilt Rotation
+			asset.transform.localRotation = Quaternion.Euler(0, 0, directionAxis * tiltAnglePower); // Tilt Rotation
 		}
 
 		//Collision
@@ -129,10 +143,10 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		}
 
 		protected void Boing(Player otherPlayer) {
-			if (otherPlayer.DirectionAxis == 0 || DirectionAxis == 0) {
+			if (otherPlayer.directionAxis == 0 || directionAxis == 0) {
 				forceExterior = powerForceExterior;
 			}
-			else if (Mathf.Sign(otherPlayer.DirectionAxis) != Mathf.Sign(DirectionAxis)) {
+			else if (Mathf.Sign(otherPlayer.directionAxis) != Mathf.Sign(directionAxis)) {
 				forceExterior = powerForceExterior * powerMultiply;
 			}
 			else {

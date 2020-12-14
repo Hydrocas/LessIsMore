@@ -4,8 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Master.unity
     guid: c77264d184ea6184185462994c48be5e
   m_configObjects: {}
+=======
+  m_Scenes: []
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 120d3d56dbf228648ac834a5aeb4a8a9, type: 2}
+>>>>>>> InputAction
