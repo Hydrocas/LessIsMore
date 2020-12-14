@@ -31,7 +31,14 @@ public class GameManager : MonoBehaviour {
 	private Vector3 radiusSpawn;
 	private AudioSource audioSource;
 
+	[Header("Win")]
+	[SerializeField] protected Canvas hud;
+	[SerializeField] protected Canvas splitScreen;
+	[SerializeField] protected WinScreen winScreen;
+
 	private void Start() {
+		Time.timeScale = 1;
+		
 		audioSource = GetComponent<AudioSource>();
 		radiusSpawn = spawnPointRadius.position - spawnPoint.position;
 
@@ -43,6 +50,11 @@ public class GameManager : MonoBehaviour {
 		for (int i = players.Count - 1; i >= 0; i--) {
 			players[i].OnWin += Player_OnWin;
 		}
+
+		//UI
+		winScreen.gameObject.SetActive(false);
+		hud.gameObject.SetActive(true);
+		splitScreen.gameObject.SetActive(true);
 	}
 
 	private void OnDestroy() {
@@ -53,6 +65,10 @@ public class GameManager : MonoBehaviour {
 
 	private void Update() {
 		RenderSettings.skybox.SetFloat("_Rotation", Time.time);
+
+		if (Input.GetMouseButtonDown(2)) {
+			Win();
+		}
 	}
 
 	private void ReSpawnArea_OnCollisionTrigger(Collider other) {
@@ -101,9 +117,20 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (lCubesCount >= cubeCount) {
-			Time.timeScale = 0;
-
-			Debug.Log("Win");
+			Win();
 		}
+	}
+
+	protected void Win() {
+		Time.timeScale = 0;
+
+		hud.gameObject.SetActive(false);
+
+		int leftCount = players[0].CubesInPlayerCount;
+		int rightCount = players[1].CubesInPlayerCount;
+
+		if (leftCount > rightCount) winScreen.Init(WinScreen.StateWin.LEFT_WIN);
+		else if (leftCount < rightCount) winScreen.Init(WinScreen.StateWin.RIGHT_WIN);
+		else winScreen.Init(WinScreen.StateWin.DRAW);
 	}
 }
