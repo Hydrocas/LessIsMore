@@ -2861,7 +2861,9 @@ MonoBehaviour:
   players:
   - {fileID: 298157539}
   - {fileID: 962255416}
-  inputActionAssets: {fileID: -944628639613478452, guid: 3efbaf922b190f549a486816c5ab53e3, type: 3}
+  inputActionAssets:
+  - {fileID: -944628639613478452, guid: 1b68ce8c402f9784094350d0b0f997ed, type: 3}
+  - {fileID: -944628639613478452, guid: 7b43cf15d2161124f965ae4248446e9e, type: 3}
 --- !u!114 &1638192982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2895,7 +2897,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 2580821669016469633, guid: d6b6ac6766c319a40be8d39e3e1d4742, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1

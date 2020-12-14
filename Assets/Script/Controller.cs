@@ -6,13 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour {
 	public event Action<float> OnMoving;
-	public bool useOnMove1 = true;
 
-	private void OnMove1(InputValue inputValue) {
-		OnMoving?.Invoke(inputValue.Get<float>());
-	}
-
-	protected void OnMove2(InputValue inputValue) {
+	private void OnMove(InputValue inputValue) {
 		OnMoving?.Invoke(inputValue.Get<float>());
 	}
 }

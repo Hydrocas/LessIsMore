@@ -1,22 +1,14 @@
 {
-    "name": "Player",
+    "name": "Player2",
     "maps": [
         {
-            "name": "Player1",
-            "id": "8366dedf-970c-4800-a5bd-464b58146f22",
+            "name": "Player2",
+            "id": "3a37c297-3703-468c-9484-9f86799cc88b",
             "actions": [
                 {
-                    "name": "Move1",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "b73925c3-b87f-4058-adb7-078b185ce12a",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Move2",
-                    "type": "Value",
-                    "id": "7544c06a-3da4-4c4e-a23b-b93eb0e05559",
+                    "id": "6675b5fb-14bb-444d-8bd9-26ed13c21c63",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
@@ -25,67 +17,34 @@
             "bindings": [
                 {
                     "name": "1D Axis",
-                    "id": "f774d9b5-0000-4701-afae-6f50887a7daa",
+                    "id": "f3ef47be-63f1-456f-baa7-d7872b9e8007",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move2",
+                    "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
-                    "id": "02f6a0f2-435e-475a-9bec-f175b4ee16ae",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move2",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "negative",
-                    "id": "0de2d78c-0aaa-41fd-8221-5ac72ebd4830",
+                    "id": "e58e020c-a163-4b25-9dd7-c8778f45a8a9",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move2",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "fee7de29-f1dc-4d54-92f2-80b5cc424af7",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move1",
-                    "isComposite": true,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "positive",
-                    "id": "4df663b0-7aee-44ed-af79-e25208f0855d",
-                    "path": "<Keyboard>/g",
+                    "id": "05e003ec-05fb-4acc-8218-4ef31d3f1126",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "589b8e84-763c-4947-bc8c-d223f9969231",
-                    "path": "<Keyboard>/j",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move1",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
