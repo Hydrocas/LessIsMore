@@ -14,16 +14,11 @@ public class PlayerManager : MonoBehaviour
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        
         playerInput.actions = inputActionAssets[playerCount];
         Player player = players[playerCount];
         player.ListenController(playerInput.gameObject.GetComponent<Controller>());
 
         playerCount++;
-
-        /*Player player = players[playerCount];
-        player.ListenController(playerInput.gameObject.GetComponent<Controller>());
-        playerCount++;*/
     }
 
     private void Awake()

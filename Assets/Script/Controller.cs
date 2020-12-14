@@ -12,4 +12,9 @@ public class Controller : MonoBehaviour
         Debug.Log(inputValue);
         OnMoving?.Invoke(inputValue.Get<float>());
     }
+
+    private void OnTest(InputValue inputValue)
+    {
+        Debug.Log(inputValue);
+    }
 }

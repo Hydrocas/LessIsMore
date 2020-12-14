@@ -224,7 +224,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			if (isStun) return true;
 
 			cubesInPlayer.Add(cube);
-			OnWin();
+			OnWin?.Invoke();
 
 			return false;
 		}
