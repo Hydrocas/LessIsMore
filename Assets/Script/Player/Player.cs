@@ -52,7 +52,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 		protected Rigidbody rbAsset;
 
         protected AudioSource audioSource;
-		private Controller controller;
+		public Controller controller;
 
 		public int CubesInPlayerCount {
 			get {

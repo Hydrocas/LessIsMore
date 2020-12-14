@@ -8,13 +8,14 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private GameObject controllerPrefab = null;
     [SerializeField] private Player[] players = null;
-    [SerializeField] private InputActionAsset[] inputActionAssets = null;
+    [SerializeField] private InputActionAsset inputActionAssets = null;
 
     private int playerCount = 0;
 
     private void OnPlayerJoined(PlayerInput playerInput)
     {
-        playerInput.actions = inputActionAssets[playerCount];
+        //playerInput.actions = inputActionAssets;
+        //playerInput.defaultActionMap = "Player" + playerCount;
         Player player = players[playerCount];
         player.ListenController(playerInput.gameObject.GetComponent<Controller>());
 
@@ -27,6 +28,6 @@ public class PlayerManager : MonoBehaviour
 
         playerInputManager.playerPrefab = controllerPrefab;
         playerInputManager.JoinPlayer();
-        //playerInputManager.JoinPlayer();
+        playerInputManager.JoinPlayer();
     }
 }
