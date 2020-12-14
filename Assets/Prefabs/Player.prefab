@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 819576791771324165}
   - component: {fileID: 8789536805017311960}
   - component: {fileID: -7040520095623329373}
+  - component: {fileID: 3514131378885772245}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -328,6 +329,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3514131378885772245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638874252781742529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 024e16fbf0406d34fafb5d8c0bc4c4fa, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f375be8b-a613-45e9-905d-68fc46802243
+    m_ActionName: Player/Move[/Keyboard/q,/Keyboard/d,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 82f011e2-c4ce-4178-926a-613098d9979c
+    m_ActionName: Player/Move2
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: d8f6f486-a0f2-4e9d-9416-619e4c9bc0a3
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &553917532819955550
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SplitScreenManager : MonoBehaviour
 {
-    [SerializeField] private Camera camera1;
-    [SerializeField] private Transform camera1Pos;
+    [SerializeField] private Camera camera1 = null;
+    [SerializeField] private Transform camera1Pos = null;
     [Space] 
-    [SerializeField] private Camera camera2;
-    [SerializeField] private Transform camera2Pos;
+    [SerializeField] private Camera camera2 = null;
+    [SerializeField] private Transform camera2Pos = null;
     [Space]
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject splitScreen;
+    [SerializeField] private Camera mainCamera = null;
+    [SerializeField] private GameObject splitScreen = null;
     [SerializeField] private float distanceToSplit = 1000;
 
     private void Awake()

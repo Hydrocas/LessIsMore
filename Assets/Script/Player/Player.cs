@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Com.IsartDigital.DontLetThemFall.Player {
 	public class Player : MonoBehaviour {
@@ -80,6 +81,11 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 			doAction();
 		}
 
+		private void OnMove(InputValue inputValue)
+		{
+			Debug.Log(inputValue);
+		}
+
 		//Move
 		protected void Move() {
 			float lDeltaTime = Time.deltaTime;
@@ -88,7 +94,7 @@ namespace Com.IsartDigital.DontLetThemFall.Player {
 
 			boingAction();
 		}
-
+		
 		protected void Tilt() {
 			asset.transform.localRotation = Quaternion.Euler(0, 0, DirectionAxis * tiltAnglePower); // Tilt Rotation
 		}
